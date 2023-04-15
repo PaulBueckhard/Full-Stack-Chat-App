@@ -3,7 +3,7 @@ import { Tooltip } from "@chakra-ui/tooltip";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { Button } from "@chakra-ui/button";
 import React, { useState } from 'react'
-import { Avatar, Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay, Input, Menu, MenuButton, MenuDivider, MenuItem, MenuList, useDisclosure, useToast } from '@chakra-ui/react';
+import { Avatar, Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay, Input, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Spinner, useDisclosure, useToast } from '@chakra-ui/react';
 import { ChatState } from '../../Context/ChatProvider';
 import ProfileModal from './ProfileModal';
 import { useHistory } from 'react-router-dom';
@@ -71,13 +71,15 @@ const SideDrawer = () => {
       setLoadingChat(true);
 
       const config = {
-        header: {
-          "Content-type":"application/json",
+        headers: {
+          "Content-type": "application/json",
           Authorization: `Bearer ${user.token}`
         }
       };
 
       const {data} = await axios.post("/api/chat", {userId}, config);
+
+      if (!chats.find((c) => c._id === data._id)) setChats([data, ...chats]);
 
       setSelectedChat(data);
       setLoadingChat(false);
@@ -126,7 +128,7 @@ const SideDrawer = () => {
               </MenuButton>
               <MenuList>
                 <ProfileModal user = {user}>
-                  <MenuItem>My profile</MenuItem>
+                  <MenuItem>Profile</MenuItem>
                 </ProfileModal>
                 <MenuDivider/>
                 <MenuItem onClick = {logoutHandler}>Log out</MenuItem>
@@ -160,6 +162,7 @@ const SideDrawer = () => {
                 />
               ))
             )}
+            {loadingChat && <Spinner ml = "auto" display = "flex" />}
           </DrawerBody>
           </DrawerContent>
         </Drawer>
