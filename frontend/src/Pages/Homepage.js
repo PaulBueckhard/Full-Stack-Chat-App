@@ -28,21 +28,22 @@ function Homepage() {
         display="flex"
         justifyContent="center"
         p={3}
-        bg="white"
+        bg="#212121"
         w="100%"
         m="40px 0 15px 0"
         borderRadius="lg"
         borderWidth="1px"
+        borderColor="#212121"
       >
-        <Text fontSize="4xl" fontFamily="Work sans" textAlign="center">
+        <Text fontSize="4xl" fontFamily="Work sans" textAlign="center" color="white">
           Chat:E
         </Text>
       </Box>
-      <Box bg="white" w="100%" p={4} borderRadius="lg" borderWidth="1px">
+      <Box bg="#212121" w="100%" p={4} borderRadius="lg" borderWidth="1px" borderColor="#212121" color="white">
         <Tabs isFitted variant="soft-rounded" colorScheme='orange'>
           <TabList mb="1em">
-            <Tab>Login</Tab>
-            <Tab>Sign Up</Tab>
+            <Tab color="white">Login</Tab>
+            <Tab color="white">Sign Up</Tab>
           </TabList>
           <TabPanels>
             <TabPanel>
