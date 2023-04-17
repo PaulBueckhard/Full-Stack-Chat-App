@@ -39,7 +39,6 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
 
           const{data} = await axios.get(`/api/message/${selectedChat._id}`, config);
 
-          console.log(messages);
           setMessages(data)
           setLoading(false);
 
@@ -76,8 +75,6 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
           config
         );
 
-          console.log(data);
-
           socket.emit("new message", data);
           setMessages([...messages, data]);
 
@@ -112,12 +109,10 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   useEffect(() => {
     socket.on("message received", (newMessagereceived) => {
       if (
-        !selectedChatCompare || selectedChatCompare._id !== newMessagereceived.chat._id
+        selectedChatCompare || selectedChatCompare._id == newMessagereceived.chat._id
       ) {
-          // give notification
-      } else {
-        setMessages([...messages, newMessagereceived]);
-      }
+          setMessages([...messages, newMessagereceived]);
+      } 
     });
   });
 
@@ -204,7 +199,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             )}
 
             <FormControl onKeyDown={sendMessage} isRequired mt={3} >
-              {istyping ? <div>Typing...</div> : <></>}
+              {istyping ? <div fontFamily = "Work sans">Typing...<Spinner size='xs' /></div> : <></>}
               <Input
                 variant="filled"
                 bg="#E0E0E0"
