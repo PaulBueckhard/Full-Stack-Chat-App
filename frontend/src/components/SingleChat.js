@@ -10,7 +10,7 @@ import "./styles.css";
 import ScrollableChat from './ScrollableChat';
 import io from 'socket.io-client'
 
-const ENDPOINT ="https://full-stack-chat-app-rose.vercel.app";
+const ENDPOINT ="https://chat-e.onrender.com";
 var socket, selectedChatCompare;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
