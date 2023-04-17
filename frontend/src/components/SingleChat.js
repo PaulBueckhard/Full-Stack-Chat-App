@@ -19,6 +19,8 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     const [loading, setLoading] = useState(false);
     const [newMessage, setNewMessage] = useState("");
     const [socketConnected, setSocketConnected] = useState(false);
+    const [typing, setTyping] = useState(false);
+    const [istyping, setIsTyping] = useState(false);
 
     const toast = useToast();
     const { user, selectedChat, setSelectedChat } = ChatState();
@@ -57,6 +59,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
 
     const sendMessage = async(event) => {
       if(event.key==="Enter" && newMessage) {
+        socket.emit("stop typing", selectedChat._id)
         try {
           const config = {
             headers: {
@@ -95,6 +98,9 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     socket = io(ENDPOINT);
     socket.emit("setup", user);
     socket.on("connected", () => setSocketConnected(true));
+    socket.on("typing", () => setIsTyping(true));
+    socket.on("stop typing", () => setIsTyping(false));
+
   }, []);
 
   useEffect(() => {
@@ -118,7 +124,23 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     const typingHandler = (e) => {
       setNewMessage(e.target.value);
 
-      // Typing logic
+      if(!socketConnected) return;
+
+      if(!typing) {
+        setTyping(true);
+        socket.emit("typing", selectedChat._id);
+      }
+      let lastTypingTime = new Date().getTime()
+      var timerLength = 3000;
+      setTimeout(() => {
+        var timeNow = new Date().getTime();
+        var timeDifference = timeNow - lastTypingTime;
+
+        if(timeDifference >= timerLength && typing) {
+          socket.emit("stop typing", selectedChat._id)
+          setTyping(false);
+        }
+      }, timerLength);
     }
 
   return (
@@ -182,6 +204,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             )}
 
             <FormControl onKeyDown={sendMessage} isRequired mt={3} >
+              {istyping ? <div>Typing...</div> : <></>}
               <Input
                 variant="filled"
                 bg="#E0E0E0"
