@@ -98,18 +98,20 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     socket.on("typing", () => setIsTyping(true));
     socket.on("stop typing", () => setIsTyping(false));
 
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
     fetchMessages();
 
     selectedChatCompare = selectedChat;
+    // eslint-disable-next-line
   }, [selectedChat]);
 
   useEffect(() => {
     socket.on("message received", (newMessagereceived) => {
       if (
-        selectedChatCompare || selectedChatCompare._id == newMessagereceived.chat._id
+        selectedChatCompare || selectedChatCompare._id === newMessagereceived.chat._id
       ) {
           setMessages([...messages, newMessagereceived]);
       } 
