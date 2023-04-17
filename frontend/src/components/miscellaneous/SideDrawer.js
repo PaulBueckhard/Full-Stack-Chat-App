@@ -103,35 +103,37 @@ const SideDrawer = () => {
           display="flex"
           justifyContent="space-between"
           alignItems="center"
-          bg="white"
+          bg="#212121"
+          color="white"
           w="100%"
           p="5px 10px 5px 10px"
-          borderWidth="5px">
+          borderWidth="5px"
+          borderColor="#212121">
           <Tooltip 
           label = "Search for users" 
           hasArrow 
           placement='bottom-end'>
-            <Button variant = "ghost" onClick = {onOpen}>
+            <Button variant="ghost" onClick = {onOpen} colorScheme='whiteAlpha' color='white'>
               <i class = "fas fa-search"></i>
-              <Text display={{ base: "none", md: "flex" }} px={4}>
+              <Text display={{ base: "none", md: "flex" }} px={4} >
                 Search user
               </Text>
             </Button>
           </Tooltip>
-          <Text fontSize="2xl" fontFamily="Work sans">
+          <Text fontSize="3xl" fontFamily="Work sans">
             Chat:E
           </Text>
           <div>
             <Menu>
-              <MenuButton as = {Button} rightIcon = {<ChevronDownIcon/>}>
+              <MenuButton as = {Button} rightIcon = {<ChevronDownIcon/>} bg="#212121" colorScheme='orange' color='white'>
                 <Avatar size = "sm" cursor = "pointer" name = {user.name} src = {user.pic} />
               </MenuButton>
-              <MenuList>
+              <MenuList bg="#212121" color="white">
                 <ProfileModal user = {user}>
-                  <MenuItem>Profile</MenuItem>
+                  <MenuItem bg="#212121" color="white">Profile</MenuItem>
                 </ProfileModal>
                 <MenuDivider/>
-                <MenuItem onClick = {logoutHandler}>Log out</MenuItem>
+                <MenuItem onClick = {logoutHandler} bg="#212121" color="white" >Log out</MenuItem>
               </MenuList>
             </Menu>
           </div>
@@ -140,8 +142,8 @@ const SideDrawer = () => {
         <Drawer placement = "left" onClose = {onClose} isOpen = {isOpen}>
           <DrawerOverlay />
           <DrawerContent>
-            <DrawerHeader borderBottomWidth = "1px">Search users</DrawerHeader>
-            <DrawerBody>
+            <DrawerHeader borderBottomWidth = "1px" bg="#212121" color="white" >Search users</DrawerHeader>
+            <DrawerBody bg="#212121" color="white">
             <Box display = "flex" pb = {2}>
               <Input 
                 placeholder = "Enter name or e-mail"
@@ -149,7 +151,7 @@ const SideDrawer = () => {
                 value = {search}
                 onChange = {(e) => setSearch(e.target.value)} 
               />
-              <Button onClick = {handleSearch}>Search</Button>
+              <Button onClick = {handleSearch} colorScheme='orange'>Search</Button>
             </Box>
             {loading ? (
               <ChatLoading/>

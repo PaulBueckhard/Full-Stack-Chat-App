@@ -126,6 +126,8 @@ const GroupChatModal = ({children}) => {
             fontFamily="Work sans"
             display="flex"
             justifyContent="center"
+            bg="#212121"
+            color="white"
             >
                 Create group chat</ModalHeader>
           <ModalCloseButton />
@@ -133,6 +135,8 @@ const GroupChatModal = ({children}) => {
           display="flex"
           flexDir="column"
           alignItems="center"
+          bg="#212121"
+          color="white"
           >
             <FormControl>
                 <Input 
@@ -169,7 +173,9 @@ const GroupChatModal = ({children}) => {
                 )}
           </ModalBody>
 
-          <ModalFooter>
+          <ModalFooter
+            bg="#212121"
+            color="white">
             <Button colorScheme='orange' onClick={handleSubmit}>
               Create chat
             </Button>

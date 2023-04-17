@@ -189,7 +189,7 @@ const UpdateGroupChatModal = ({fetchAgain, setFetchAgain, fetchMessages}) => {
 
   return (
     <>
-      <IconButton display={{base: "flex"}} icon={<ViewIcon/>} onClick={onOpen}/>
+      <IconButton display={{base: "flex"}} icon={<ViewIcon/>} onClick={onOpen} bg="#212121" colorScheme='orange'/>
 
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />
@@ -199,9 +199,13 @@ const UpdateGroupChatModal = ({fetchAgain, setFetchAgain, fetchMessages}) => {
             fontFamily="Work sans"
             display="flex"
             justifyContent="center"
+            bg="#212121"
+            color="white"
           >{selectedChat.chatName}</ModalHeader>
           <ModalCloseButton />
-          <ModalBody>
+          <ModalBody
+            bg="#212121"
+            color="white">
             <Box 
                 w="100%"
                 display="flex"
@@ -253,7 +257,9 @@ const UpdateGroupChatModal = ({fetchAgain, setFetchAgain, fetchMessages}) => {
             )}
           </ModalBody>
 
-          <ModalFooter>
+          <ModalFooter
+            bg="#212121"
+            color="white">
             <Button onClick={() => handleRemove(user)} colorScheme="red">
               Leave group chat
             </Button>

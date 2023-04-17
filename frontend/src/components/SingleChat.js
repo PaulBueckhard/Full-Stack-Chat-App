@@ -153,11 +153,14 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             display = "flex"
             justifyContent = {{ base: "space-between" }}
             alignItems = "center"
+            color="white"
         >
             <IconButton
                 display = {{ base: "flex", md: "none" }}
                 icon = {<ArrowBackIcon />}
                 onClick = {() => setSelectedChat("")}
+                bg="#212121"
+                colorScheme='orange'
             />
             {!selectedChat.isGroupChat ? (
                 <>
@@ -180,7 +183,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             flexDir="column"
             justifyContent="flex-end"
             p={3}
-            bg="#E8E8E8"
+            bg="#424242"
             w="100%"
             h="100%"
             borderRadius="lg"
@@ -193,6 +196,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                 h={20}
                 alignSelf="center"
                 margin="auto"
+                color='white'
               />
             ): (
               <div className='messages'>
@@ -201,13 +205,15 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             )}
 
             <FormControl onKeyDown={sendMessage} isRequired mt={3} >
-              {istyping ? <div fontFamily = "Work sans">Typing...<Spinner size='xs' /></div> : <></>}
+              {istyping ? <Text fontFamily = "Work sans" color='white'>Typing...<Spinner size='xs' color='white' /></Text> : <></>}
               <Input
                 variant="filled"
                 bg="#E0E0E0"
                 placeholder="Send a message..."
                 onChange={typingHandler}
                 value={newMessage}
+                color="white"
+                autocomplete="off"
               />
             </FormControl>
         </Box>
@@ -222,7 +228,8 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             <Text 
             fontSize = "3xl"
             pb = {3}
-            fontFamily = "Work sans" 
+            fontFamily = "Work sans"
+            color="white" 
             >
                 Click on a user to start chatting
             </Text>
